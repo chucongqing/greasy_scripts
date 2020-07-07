@@ -8,6 +8,7 @@
 // @match        https://adnmb2.com/f/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/chucongqing/greasy_scripts/master/adplus.js
+// @note         https://github.com/chucongqing/greasy_scripts/edit/master/adplus.js
 // ==/UserScript==
 'use strict';
 
