@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         A岛-PLUS
 // @namespace    adplus_ccq
-// @version      0.3
+// @version      0.4
 // @description  try to take over the world!
 // @author       ccq
 // @match        https://adnmb2.com/t/*
 // @match        https://adnmb2.com/f/*
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/chucongqing/greasy_scripts/master/adplus.js
 // ==/UserScript==
 'use strict';
 
