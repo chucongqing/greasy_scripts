@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         A岛-PLUS
 // @namespace    adplus_ccq
-// @version      0.5
+// @version      0.5.1
 // @description  try to take over the world!
 // @author       ccq
 // @match        https://adnmb2.com/t/*
@@ -147,17 +147,18 @@ function exfunc(){
 
 function backupdefault(){
     defaultCfg.html_bg = $('html').css("background")
-    defaultCfg.html_color = $('html').css("color",config.fontColor)
-    defaultCfg.h_threads_item_bg =  $('.h-threads-item').css("background",config.bodyBg)
-    defaultCfg.h_threads_content_color = $('.h-threads-content').css("color",config.fontColor)
-    defaultCfg.htirm_bg = $(".h-threads-item-reply-main").css("background",config.centreBg)
-    defaultCfg.hpft_bg = $('.h-post-form-title').css("background",config.bodyBg)
-    defaultCfg.ht_color = $(".h-title").css("color",config.fontColor)
+    defaultCfg.html_color = $('html').css("color")
+    defaultCfg.h_threads_item_bg =  $('.h-threads-item').css("background")
+    defaultCfg.h_threads_content_color = $('.h-threads-content').css("color")
+    defaultCfg.htirm_bg = $(".h-threads-item-reply-main").css("background")
+    defaultCfg.hpft_bg = $('.h-post-form-title').css("background")
+    defaultCfg.ht_color = $(".h-title").css("color")
     //$('.h-ref-view').css("background",config.centreBg)
 }
 
 (function() {
     theme = GM_getValue("theme",Theme.Default)
+    backupdefault();
     console.log("current theme = " + theme)
 OnChangeTheme();
 
