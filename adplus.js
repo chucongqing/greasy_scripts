@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         A岛-PLUS
 // @namespace    adplus_ccq
-// @version      0.5.1
+// @version      0.5.2
 // @description  try to take over the world!
 // @author       ccq
 // @match        https://adnmb2.com/t/*
@@ -60,6 +60,23 @@ function setcss(config){
     $('.h-post-form-title').css("background",config.hpft_bg)
     $(".h-title").css("color",config.hpft_bg)
    // $('.h-ref-view').css("background",config.centreBg)
+   // $("#h-ref-view").css("background",config.h_threads_item_bg)
+    $("font[color='#789922']").filter(function () {
+            return /^((>>No\.)|(>>)|(>))\d+$/.test($(this).text());
+        })
+        .on("mouseenter",(e)=>{
+        console.log("hello")
+        let intv = setInterval(()=>{
+         $("#h-ref-view").find(".h-threads-item-reply-main").css("background",config.htirm_bg)
+        $("#h-ref-view").find(".h-threads-content").css("color",config.h_threads_content_color)
+        $("#h-ref-view").find(".h-threads-item").css("background",config.h_threads_item_bg)
+        },100)
+
+        setTimeout( ()=>{
+            clearInterval(intv)
+        }, 500)
+
+    })
 }
 
 function t_func() {
