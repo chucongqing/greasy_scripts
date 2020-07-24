@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         A岛-PLUS
 // @namespace    adplus_ccq
-// @version      0.5.2
-// @description  try to take over the world!
+// @version      0.6
+// @description  lalalala!
 // @author       ccq
 // @match        https://adnmb2.com/t/*
 // @match        https://adnmb2.com/f/*
+// @match        https://adnmb2.com/Forum
+// @match        https://adnmb2.com/Member/User/Cookie/index.html
 // @grant GM_setValue
 // @grant GM_getValue
 // @note         https://github.com/chucongqing/greasy_scripts/edit/master/adplus.js
@@ -146,7 +148,7 @@ function OnChangeTheme(){
 function exfunc(){
    let menu = $("#h-menu-content")
    let c = $("<li class=\"h-nav-item\">  <a>  Dark Mode </a></li>")
-   c.children("a").click(()=>{
+    c.children("a").click(()=>{
       if(theme == 0)
       {
           theme =1 }
@@ -173,11 +175,54 @@ function backupdefault(){
     //$('.h-ref-view').css("background",config.centreBg)
 }
 
+function CookieManage(){
+    let trs = $($("tbody").children())
+
+    console.log("trs length > " + trs.length)
+    for(let i = 0; i < trs.length; i++)
+    {
+        let tds = $(trs[i])
+
+        let cookie = tds.children().eq(2).text()
+        let aa = $(tds.find(" div div a:first"))
+        let href = aa.attr("href")
+        console.log("href=" + href)
+        aa.removeAttr("href")
+        aa.click( ()=>{
+            console.log("Set Cookie=" + cookie)
+            GM_setValue("cookie",cookie)
+            alert("set cookie ok")
+            window.location.href=href
+        })
+    }
+}
+
 (function() {
+    //console.log(window.location.pathname)
+    if (window.location.pathname === "/Member/User/Cookie/index.html")
+    {
+        console.log("cookie manage")
+        CookieManage();
+        return;
+    }
+    let cookie = GM_getValue("cookie","0")
+    if (cookie === "0") {
+        console.log("还没捕获饼干设置")
+    }
+    else{
+        console.log(`当前饼干:${cookie}`)
+
+        let dd = $("#h-post-form form div div:eq(2)")
+        if( dd.length == 1){
+           dd.text(`当前饼干：${cookie}\n${dd.text()}`)
+        }
+
+    }
+
     theme = GM_getValue("theme",Theme.Default)
     backupdefault();
     console.log("current theme = " + theme)
-OnChangeTheme();
+    OnChangeTheme();
 
     exfunc()
 
