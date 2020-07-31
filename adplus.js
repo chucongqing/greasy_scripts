@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         A岛-PLUS
 // @namespace    adplus_ccq
-// @version      0.6
+// @version      0.6.1
 // @description  lalalala!
 // @author       ccq
 // @match        https://adnmb2.com/t/*
@@ -10,7 +10,7 @@
 // @match        https://adnmb2.com/Member/User/Cookie/index.html
 // @grant GM_setValue
 // @grant GM_getValue
-// @note         https://github.com/chucongqing/greasy_scripts/edit/master/adplus.js
+// @note         https://github.com/chucongqing/greasy_scripts/blob/master/adplus.js
 // ==/UserScript==
 'use strict';
 
@@ -210,13 +210,19 @@ function CookieManage(){
         console.log("还没捕获饼干设置")
     }
     else{
-        console.log(`当前饼干:${cookie}`)
+        let cstr = `当前饼干:${cookie}`
+       // console.log(cstr)
 
+        let form = $("#h-post-form form")
+
+        form.prepend($(`<div>${cstr}</div>`))
+        /*
         let dd = $("#h-post-form form div div:eq(2)")
+        dd.clone
         if( dd.length == 1){
            dd.text(`当前饼干：${cookie}\n${dd.text()}`)
         }
-
+*/
     }
 
     theme = GM_getValue("theme",Theme.Default)
