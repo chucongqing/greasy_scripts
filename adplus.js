@@ -1,16 +1,21 @@
 // ==UserScript==
 // @name         A岛-PLUS
 // @namespace    adplus_ccq
-// @version      0.6.1
+// @version      0.6.2
 // @description  lalalala!
 // @author       ccq
-// @match        https://adnmb2.com/t/*
-// @match        https://adnmb2.com/f/*
-// @match        https://adnmb2.com/Forum
-// @match        https://adnmb2.com/Member/User/Cookie/index.html
+// @match        https://adnmb*.com/t/*
+// @match        https://adnmb*.com/f/*
+// @include        http*://adnmb*.com/*
+// @match        https://adnmb*.com/Member/User/Cookie/index.html
+// @match        https://adnmb3.com/t/*
+// @match        https://adnmb3.com/f/*
+// @match        https://adnmb3.com/Forum
+// @match        https://adnmb3.com/Member/User/Cookie/index.html
 // @grant GM_setValue
 // @grant GM_getValue
-// @note         https://github.com/chucongqing/greasy_scripts/blob/master/adplus.js
+// @note         https://github.com/chucongqing/greasy_scripts/edit/master/adplus.js
+// @updateURL   https://github.com/chucongqing/greasy_scripts/edit/master/adplus.js
 // ==/UserScript==
 'use strict';
 
@@ -19,7 +24,7 @@ var darkCfg ={
     textAreaBg: '#282a2e',
     fontColor: '#c5c8c6',
     centreBg: '#2B2B2B',
-    threadPoBg:"#3A3A42"
+    threadPoBg:'#323237' //"#3A3A42"
 }
 
 var defaultCfg = {
@@ -112,11 +117,17 @@ function t_func() {
 function f_func() {
     var cl = $(".h-threads-list")
     var d = cl.children("div")
+    console.log("begin replace reply " + `d length = ${d.length}`)
     for(var i = 0 ; i < d.length; i++ ) {
         var aa = $(d[i])
         //console.log(`id = ${ aa.attr("data-threads-id")}`)
         let wt = aa.find("span.warn_txt2")
         var rep = aa.find("span.h-threads-info-reply-btn")
+        if(!wt || !rep)
+        {
+            console.error(`the wt= ${wt}  rep=${rep}`)
+            continue;
+        }
         let href = rep.children("a").attr("href")
 
         var wttxt = wt.text()
@@ -140,6 +151,9 @@ function OnChangeTheme(){
      if(pathname.indexOf("/f/") >= 0 ) {
         f_func()
      }
+    else if(pathname.indexOf("/timeline/") >= 0){
+f_func()
+    }
     else if( pathname.indexOf("/t/") >= 0 ) {
         t_func()
     }
