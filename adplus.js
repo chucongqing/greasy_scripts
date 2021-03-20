@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         A岛-PLUS
 // @namespace    adplus_ccq
-// @version      0.6.2
-// @description  lalalala!
+// @version      0.6.4
+// @description  夜间模式,显示当前Cookie,Po主变色等
 // @author       ccq
 // @match        https://adnmb*.com/t/*
 // @match        https://adnmb*.com/f/*
 // @include        http*://adnmb*.com/*
+// @match        https://adnmb.com/
 // @match        https://adnmb*.com/Member/User/Cookie/index.html
 // @match        https://adnmb3.com/t/*
 // @match        https://adnmb3.com/f/*
@@ -15,7 +16,6 @@
 // @grant GM_setValue
 // @grant GM_getValue
 // @note         https://github.com/chucongqing/greasy_scripts/edit/master/adplus.js
-// @updateURL   https://github.com/chucongqing/greasy_scripts/edit/master/adplus.js
 // ==/UserScript==
 'use strict';
 
@@ -25,6 +25,7 @@ var darkCfg ={
     fontColor: '#c5c8c6',
     centreBg: '#2B2B2B',
     threadPoBg:'#323237' //"#3A3A42"
+
 }
 
 var defaultCfg = {
@@ -50,7 +51,8 @@ function dark_mode(){
     cfg.htirm_bg = config.centreBg //$(".h-threads-item-reply-main").css("background",config.centreBg)
     cfg.hpft_bg = config.bodyBg //$('.h-post-form-title').css("background",config.bodyBg)
     cfg.ht_color =config.fontColor // $(".h-title").css("color",config.fontColor)
-
+    cfg.left_menu_bg = config.bodyBg
+    cfg.left_menu_font = "grey"
     setcss(cfg)
 }
 
@@ -84,6 +86,13 @@ function setcss(config){
         }, 500)
 
     })
+
+    //left menu bar
+    $("#h-menu").css("background",config.left_menu_bg)
+    $("#h-menu a").css("color", config.left_menu_font)
+    $("#h-bottom-nav").css("background",config.left_menu_bg)
+    $('#h-bottom-nav a').css('color', config.left_menu_font)
+
 }
 
 function t_func() {
@@ -179,6 +188,7 @@ function exfunc(){
 }
 
 function backupdefault(){
+
     defaultCfg.html_bg = $('html').css("background")
     defaultCfg.html_color = $('html').css("color")
     defaultCfg.h_threads_item_bg =  $('.h-threads-item').css("background")
@@ -186,6 +196,8 @@ function backupdefault(){
     defaultCfg.htirm_bg = $(".h-threads-item-reply-main").css("background")
     defaultCfg.hpft_bg = $('.h-post-form-title').css("background")
     defaultCfg.ht_color = $(".h-title").css("color")
+    defaultCfg.left_menu_bg = $("#h-menu").css("background")
+    defaultCfg.left_menu_font = $("#h-menu a").css("color")
     //$('.h-ref-view').css("background",config.centreBg)
 }
 
